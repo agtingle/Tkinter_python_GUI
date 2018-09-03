@@ -7,7 +7,7 @@ root.geometry('300x300')
 
 #measureSystem = StringVar()
 
-#check = ttk.Checkbutton(root, text='Use Metric', command=metricChanged, variable=mesureSystem, onvalue='metric', offvalue='imperical')
+#check = ttk.Checkbutton(root, text='Use Metric', variable=mesureSystem, onvalue='metric', offvalue='imperical')
 #check.grid()
 
 phone = StringVar()
