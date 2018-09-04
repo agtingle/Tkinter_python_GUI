@@ -66,8 +66,8 @@ root.grid_rowconfigure(0,weight=1)
 # Note we're using the StringVar() 'cnames', constructed from 'countrynames'
 lbox = Listbox(c, listvariable=cnames, height=5)
 lbl = ttk.Label(c, text="Send to country's leader:")
-g1 = ttk.Radiobutton(c, text=gifts['card'], variable=gift, value='card')
-g2 = ttk.Radiobutton(c, text=gifts['flowers'], variable=gift, value='flowers')
+g1 = ttk.Radiobutton(c, text=gifts['card'], variable=gift, value='card')#'variable=gift': give the value of this radiobutton to variable 'gift'
+g2 = ttk.Radiobutton(c, text=gifts['flowers'], variable=gift, value='flowers')#value='flowers': this value is the shown text of radiobutton
 g3 = ttk.Radiobutton(c, text=gifts['nastygram'], variable=gift, value='nastygram')
 send = ttk.Button(c, text='Send Gift', command=sendGift, default='active')
 sentlbl = ttk.Label(c, textvariable=sentmsg, anchor='center')

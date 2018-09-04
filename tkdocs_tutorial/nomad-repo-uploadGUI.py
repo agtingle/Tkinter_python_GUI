@@ -15,8 +15,9 @@ lbl1.grid(row=0, column=0, sticky=W)
 #funtions:open a filedialog window,select files and add it to the listbox
 
 uploadfilename_dict = {}
+msg = StringVar()
 def file_directory_get(*args):
-    file_directory = tkFileDialog.askopenfilename(initialdir = '/', title='Select file', \
+    file_directory = tkFileDialog.askopenfilename(initialdir = '/home/syang', title='Select file', \
                                                   filetypes = (("zip files","*.zip"),("tar files","*.tar.gz"),("all files","*.*")))
     try:
         uploadfilename_dict[file_directory.split('/')[-1]]
@@ -26,9 +27,13 @@ def file_directory_get(*args):
     else:
         tkMessageBox.showinfo("Warning", "File already exists in the list!")#Add a existing file would accept a warning
 
-def remove_selected_listitem():
-    #current_selction = listfile.curselection()
-    listfile.delete(ANCHOR)
+def remove_selected_listitem(): ##to be checked
+    current_selection = listfile.curselection()
+    idx = int(current_selection[0])
+    msg.set('File \' %s \' has been deleted from the upload list!' % listfile.get(idx))
+    
+    del uploadfilename_dict[listfile.get(int(idx))] #delete it also in the dict
+    listfile.delete(current_selection)
     
 
 
@@ -59,11 +64,13 @@ add_button = Button(root, text='Add',command=file_directory_get, font=('Helvetic
 remove_button = Button(root, text='Remove',command=remove_selected_listitem, font=('Helvetica', 8), width=6, height=1)
 upload_button = Button(root, text='Upload',font=('Helvetica', 8), width=6, height=1)#command=??
 exit_button = Button(root, text='Cancel', command=root.quit, font=('Helvetica', 8), width=6, height=1)
+msg_label = Label(root, textvariable=msg, anchor='center')
 
 add_button.grid(row=0, column=1, padx=5)
 remove_button.grid(row=1, column=1, padx=5, pady=2)
-upload_button.grid(row=2, column=1, padx=5, pady=6)
-exit_button.grid(row=3, column=1, padx=5, pady=6)
+msg_label.grid(row=2, column=1, padx=5, pady=2)
+upload_button.grid(row=3, column=1, padx=5, pady=6)
+exit_button.grid(row=4, column=1, padx=5, pady=6)
 
 #for x in range(100):
 #    tmp = 'filename' + str(x)
@@ -71,3 +78,4 @@ exit_button.grid(row=3, column=1, padx=5, pady=6)
 
 
 root.mainloop()
+
